@@ -2,11 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Models\Model;
+
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
-
-
+use App\Models\Post;
 
 class PostFactory extends Factory
 {
@@ -15,7 +13,7 @@ class PostFactory extends Factory
      *
      * @var string
      */
-    protected $model = Model::class;
+    protected $model = Post::class;
 
     /**
      * Define the model's default state.
