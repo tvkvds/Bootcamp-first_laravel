@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rules\Exists;
+use App\Models\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,5 +26,17 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::resource('/user', App\Http\Controllers\UserController::class);
 
-Route::resource('/post', App\Http\Controllers\PostController::class);
+Route::get('/posts', function () {
+
+    $posts = Post::allPosts();
+   
+
+    return view('/posts', ['posts' => Post::allPosts()]);
+});
+
+Route::get('/posts/{post}', function ($slug) {
+
+    return view('/post', ['post' => Post::find($slug)]);
+
+})->where('post', '[A-z_/-]+');
 
