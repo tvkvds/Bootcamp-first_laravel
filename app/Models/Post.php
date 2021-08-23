@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\File;
+use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 class Post extends Model
 {
@@ -31,33 +32,44 @@ class Post extends Model
 
     public static function allPosts()
     {
-        $files =  File::files(resource_path('posts/'));
 
-       return array_map(function ($file){
-            return $file->getContents();
-        }, $files);
+        return cache()->rememberForever('posts.all', function (){
+            
+            //grab files
+            $files =  File::files(resource_path('posts/'));
+
+            //map over files and read metadata + body to make a new Post with
+            return collect($files)
+            ->map(function ($file){
+                $document = YamlFrontMatter::parseFile($file);
+            
+                
+                return new Post(
+                    $document->title,
+                    $document->excerpt,
+                    $document->date,
+                    $document->body(),
+                    $document->slug,
+                );
+
+            })->sortByDesc('date');
+
+        });
+        
+
+   
     }
 
     public static function find($slug)
     {
         
-         //declare file location
-        $path = resource_path('posts/' . $slug . '.blade.php');
-   
-        //check if file exists
-        if (! file_exists($path))
-        {
+        $posts = Post::allPosts();
+
+        if (! $posts->firstWhere('slug',$slug)) {
             throw new ModelNotFoundException();
         }
 
-        //cache file
-        $post = cache()->remember('posts/' . $slug . '.blade.php', 5, function () use ($path)
-        {
+        return $posts;
 
-            return file_get_contents($path);
-
-        });
-        
-        return $post;
     }
 }

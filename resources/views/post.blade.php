@@ -4,8 +4,12 @@
 
 <div class="container">
 
-<?= ddd($post) ?>
-<?= $post ?>
+{{$post->title}}
+
+<br>
+<hr>
+<br>
+{!! $post->body !!}
 
 </div>
 

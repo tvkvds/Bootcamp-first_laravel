@@ -26,43 +26,21 @@ Auth::routes();
 
 Route::get('/home', function () {
     
-    $posts = [];
+    return view('/home');
 
-    $files =  File::files(resource_path('posts/'));
-
-    foreach ($files as $file){
-        $document = YamlFrontMatter::parseFile($file);
-       
-        
-        $posts[] = new Post(
-            $document->title,
-            $document->excerpt,
-            $document->date,
-            $document->body(),
-            $document->slug,
-        );
-        
-       
-    }
-
-    return view('/posts', ['posts' => $posts]);
-
-    
 });
 
 Route::resource('/user', App\Http\Controllers\UserController::class);
 
 Route::get('/posts', function () {
 
-    $posts = Post::allPosts();
-   
-
     return view('/posts', ['posts' => Post::allPosts()]);
+
 });
 
 Route::get('/posts/{post}', function ($slug) {
 
     return view('/post', ['post' => Post::find($slug)]);
 
-})->where('post', '[A-z_/-]+');
+});
 
