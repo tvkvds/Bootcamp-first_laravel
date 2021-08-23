@@ -1,4 +1,9 @@
-
+---
+title: My first post
+excerpt: Air midst cattle made void tree said first void third set lesser all whales. Second creeping.
+date : 19850402
+slug: my-first-post
+---
 
 <article>
 

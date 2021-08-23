@@ -12,6 +12,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
+        "spatie/yaml-front-matter": "^2.0",
         "wildside/userstamps": "^2.1"
     },
     "require-dev": {

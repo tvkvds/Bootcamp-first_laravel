@@ -1,4 +1,9 @@
-
+---
+title: My second post
+excerpt: Which given grass gathered own. Day and bring saw. Forth so. 
+date : 19850502
+slug: my-second-post
+---
 
 <article>
 

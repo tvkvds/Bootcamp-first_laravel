@@ -1,4 +1,9 @@
-
+---
+title: My third post
+excerpt: Open from whose man fourth. Replenish god made fish that second
+date : 19850602
+slug: my-third-post
+---
 
 <article>
 
