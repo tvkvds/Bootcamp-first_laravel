@@ -19,7 +19,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        dd('hoi');
+        dd('user controller index');
     }
 
     /**

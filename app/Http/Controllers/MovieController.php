@@ -3,18 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Unsplash;
 
-class PostController extends Controller
+class MoviesController extends Controller
 {
-    /**
+  /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return view('posts/index');   
+        return view('movies/{user}/index');   
     }
 
     /**

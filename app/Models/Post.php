@@ -68,8 +68,10 @@ class Post extends Model
         if (! $posts->firstWhere('slug',$slug)) {
             throw new ModelNotFoundException();
         }
+        
+         return $posts->firstWhere('slug',$slug);
 
-        return $posts;
+        
 
     }
 }
