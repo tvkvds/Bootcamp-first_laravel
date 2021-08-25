@@ -20,6 +20,7 @@ class Post extends Model
     public $date = '';
     public $body = '';
     public $slug = '';
+   
 
     public function __construct($title, $excerpt, $date, $body, $slug)
     {
