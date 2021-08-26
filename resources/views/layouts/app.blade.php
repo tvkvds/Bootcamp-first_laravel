@@ -96,5 +96,9 @@
            
         </main>
     </div>
+
+    <footer>
+   <span class="text-muted footer"> made possibly by imdb api </span>
+    </footer>
 </body>
 </html>

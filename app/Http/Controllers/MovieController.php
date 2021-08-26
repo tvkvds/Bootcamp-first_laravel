@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use hmerritt\Imdb;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class MovieController extends Controller
 {
+
   /**
      * Display a listing of the resource.
      *
@@ -13,7 +18,16 @@ class MovieController extends Controller
      */
     public function index()
     {
-        return view('/movies/movies');   
+
+        
+        
+    $imdb = new Imdb;
+    $movies = $imdb->search($_POST['findmovie']);
+
+
+    
+
+    return view('/movies/movies', ['movies' => $movies]);
     }
 
     /**
@@ -45,7 +59,22 @@ class MovieController extends Controller
      */
     public function show($id)
     {
-        //
+        
+        //check for logged in user
+        $userId = Auth::check() ? Auth::id() : true;    
+        
+        //request movie data
+        $imdb = new Imdb;
+        $movie = $imdb->film($id);
+
+        //get userdata from database
+
+        
+
+        return view('/movies/show', [
+            'movie' => $movie,
+            'user' => $userId
+            ] );
     }
 
     /**

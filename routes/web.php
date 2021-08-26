@@ -2,9 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Post;
 use Illuminate\Support\Facades\Cache;
-use hmerritt\Imdb;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -40,49 +39,9 @@ Route::get('/home', function () {
 
 });
 
-/*
-
-Route::get('/findmovie', function () {
-    return view('/movie/findmovie');
-});
-
-
-Route::post('/movies', function () {
-
-    var_dump($_POST);
-    $imdb = new Imdb;
-    $movies = $imdb->search($_POST['findmovie']);
-    
-
-    return view('/movie/movies', ['movies' => $movies]);
-});
-
-
-
-Route::get('/movie', function () {
-    
-    $imdb = new Imdb;
-    $movies = $imdb->search("how to train");
-    
-
-    return view('/movie/movie', ['movies' => $movies]);
-});
-
-*/
-
 Route::resource('/user', App\Http\Controllers\UserController::class);
 
-Route::get('/posts', function () {
-
-    return view('/posts', ['posts' => Post::allPosts()]);
-
-});
-
-Route::get('/posts/{post}', function ($slug) {
-
-    return view('/post', ['post' => Post::find($slug)]);
-
-});
-
 Route::resource('movies', App\Http\Controllers\MovieController::class);
+
+Route::post('/movies', [App\Http\Controllers\MovieController::class, 'index']);
 
