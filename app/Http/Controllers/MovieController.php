@@ -13,7 +13,7 @@ class MovieController extends Controller
      */
     public function index()
     {
-        return view('movies/{user}/index');   
+        return view('/movies/movies');   
     }
 
     /**

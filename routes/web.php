@@ -46,6 +46,7 @@ Route::get('/findmovie', function () {
     return view('/movie/findmovie');
 });
 
+
 Route::post('/movies', function () {
 
     var_dump($_POST);

@@ -35,6 +35,22 @@
                     <ul class="navbar-nav mr-auto">
 
                     </ul>
+                    <div class="col-md-8">
+        
+            <form class="mt-2" method="post" action="/movies">
+                @csrf
+                <div  class="form-group">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control form-control-lg" name="findmovie" placeholder="Search Movie">
+                        <button type="submit" class="input-group-text btn-success"><i class="bi bi-search me-2"></i> Search</button>
+                    </div>
+                </div>
+
+                
+    
+            </form>
+                
+        </div>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -77,6 +93,7 @@
 
         <main class="py-4">
             @yield('content')
+           
         </main>
     </div>
 </body>

@@ -20,6 +20,8 @@ class Movies extends Migration
             $table->string('movie_id', 100)->unique()->default(0);
             $table->bigInteger('watched')->default(0);
             $table->bigInteger('watchlists')->default(0);
+            $table->string('title', 500);
+            $table->bigInteger('rating')->default(0);
             
         });
     }

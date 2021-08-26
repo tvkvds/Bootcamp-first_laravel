@@ -1,9 +1,8 @@
-@extends('layouts.app')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
+<div class="container d-flex justify-content-center">
+    <div class="row ">
         <div class="col-md-8">
+        form
             <form  method="post" action="/movies">
             @csrf
                 <div  class="form-group">
@@ -15,4 +14,4 @@
         </div>
     </div>
 </div>
-@endsection
+
