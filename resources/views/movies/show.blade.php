@@ -11,11 +11,11 @@
             <div class="row">
 
                 <div class="col ">
-                    <img width="250" src="{{$movie['poster']}}">
+                    <img width="250" src="{{$movieAPI['poster']}}">
                 </div>
 
                 <div class="col ">
-                    <h2> {{$movie['title']}} </h2>
+                    <h2> {{$movieAPI['title']}} </h2>
                     <br>
                     <div class="row">
 
@@ -29,12 +29,12 @@
                         </div>
                     
                         <div class="col">
-                            <p><a href="{{$movie['trailer']['link']}}">watch<a></p>
-                            <p> {{$movie['length']}} </p>
-                            <p> {{$movie['year']}}</p>
-                            <p> 5/7</p>
-                            <p> 27</p>
-                            <p> 99</p>
+                            <p><a href="{{$movieAPI['trailer']['link']}}">watch<a></p>
+                            <p> {{$movieAPI['length']}} </p>
+                            <p> {{$movieAPI['year']}}</p>
+                            <p> {{$movieDB['rating']}}</p>
+                            <p> {{$movieDB['watched_by']}} </p>
+                            <p> {{$movieDB['watchlists']}}</p>
                         </div>
 
                     </div>
@@ -57,6 +57,30 @@
 
         {{$user}}
 
+        <h2> {{$movieAPI['title']}} </h2>
+                    <br>
+                    <div class="row">
+
+                        <div class="col">
+                            <p>  </p>
+                            <p>  </p>
+                            <p>  </p>
+                            <p>  </p>
+                            <p>  </p>
+                            <p>  </p>
+                        </div>
+                    
+                        <div class="col">
+                            <p> </p>
+                            <p> </p>
+                            <p> </p>
+                            <p> </p>
+                            <p> </p>
+                            <p> </p>
+                        </div>
+
+                    </div>
+
         </div>
 
 
@@ -64,8 +88,9 @@
     </div>
 
     <div class="row">
-
         
+        {{$movieAPI['trailer']['link']}}
+        <iframe src="https://www.imdb.com/video/imdb/{{$movieAPI['id']}}/imdb/embed?autoplay=false&width=480" width="480" height="270" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" frameborder="no" scrolling="no"></iframe>
     
 
         

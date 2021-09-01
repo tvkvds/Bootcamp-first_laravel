@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use App\Models\Movie;
 
 
 /*
@@ -41,7 +42,11 @@ Route::get('/home', function () {
 
 Route::resource('/user', App\Http\Controllers\UserController::class);
 
-Route::resource('movies', App\Http\Controllers\MovieController::class);
+
 
 Route::post('/movies', [App\Http\Controllers\MovieController::class, 'index']);
+
+Route::get('/movies/{movie:slug}',  [App\Http\Controllers\MovieController::class, 'show']);
+
+
 

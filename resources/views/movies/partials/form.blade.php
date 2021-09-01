@@ -3,7 +3,7 @@
     <div class="row ">
         <div class="col-md-8">
         form
-            <form  method="post" action="/movies">
+            <form  method="post" action="/movies/index">
             @csrf
                 <div  class="form-group">
                     <label for="findmovie">Search for movie</label>

@@ -22,6 +22,7 @@ class UserMovie extends Migration
             $table->tinyInteger('watched')->default(0);
             $table->tinyInteger('rated')->default(0);
             $table->bigInteger('rating')->nullable();
+           
             
         });
     }
@@ -33,6 +34,7 @@ class UserMovie extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('user_movies');
+       
     }
 }

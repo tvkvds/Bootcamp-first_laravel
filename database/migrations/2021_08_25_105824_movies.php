@@ -17,11 +17,12 @@ class Movies extends Migration
         Schema::create('movies', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('movie_id', 100)->unique()->default(0);
-            $table->bigInteger('watched')->default(0);
+            $table->string('movie_id', 100)->unique();
+            $table->bigInteger('watched_by')->default(0);
             $table->bigInteger('watchlists')->default(0);
             $table->string('title', 500);
             $table->bigInteger('rating')->default(0);
+            $table->string('slug');
             
         });
     }
@@ -33,7 +34,7 @@ class Movies extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cache');
-        Schema::dropIfExists('cache_locks');
+        Schema::dropIfExists('movies');
+        
     }
 }

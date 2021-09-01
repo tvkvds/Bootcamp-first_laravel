@@ -25,10 +25,11 @@ class MovieFactory extends Factory
         return [
             
                 'watchlists' => rand(0,1234),
-                'watched' => rand(0,1234),
+                'watched_by' => rand(0,1234),
                 'movie_id' => Str::lower(Str::random(9)),
                 'title' => $this->faker->catchPhrase(),
-                'rating' => rand(1,5)
+                'rating' => rand(1,5),
+                'slug' => 'a-title-slug-' . rand(1, 100)
            
         ];
     }
