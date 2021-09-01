@@ -24,7 +24,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ env('APP_NAME') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -35,6 +35,22 @@
                     <ul class="navbar-nav mr-auto">
 
                     </ul>
+                    <div class="col-md-8">
+        
+            <form class="mt-2" method="post" action="/movies">
+                @csrf
+                <div  class="form-group">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control form-control-lg" name="findmovie" placeholder="Search Movie">
+                        <button type="submit" class="input-group-text btn-success"><i class="bi bi-search me-2"></i> Search</button>
+                    </div>
+                </div>
+
+                
+    
+            </form>
+                
+        </div>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -77,7 +93,12 @@
 
         <main class="py-4">
             @yield('content')
+           
         </main>
     </div>
+
+    <footer>
+  
+    </footer>
 </body>
 </html>
