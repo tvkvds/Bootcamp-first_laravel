@@ -20,17 +20,13 @@ class DatabaseSeeder extends Seeder
             'name' => 'tam',
             'email' => 'tam@test.nl',
             'email_verified_at' => now(),
-            'password' => bcrypt('pmwpassword!'), // password
+            'password' => bcrypt('pmwpassword!'),
             'remember_token' => Str::random(10),
         ]);
 
         \App\Models\Movie::factory(20)->create();
 
-        \App\Models\User_movie::factory(20)->create();
-        \App\Models\User_movie::factory(2)->create([
-            'user_id' => 11,
-            'rating' => rand(0, 5)
-        ]);
+        
        
        
 

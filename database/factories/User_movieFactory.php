@@ -28,6 +28,7 @@ class User_movieFactory extends Factory
             'user_id' => User::factory(),
             'movie_id' => Movie::factory(),
             'watched' => rand(0, 1),
+            'watchlist' => rand(0, 1),
             'rated' => rand(0, 1),
             'rating' => rand(1, 5)
             

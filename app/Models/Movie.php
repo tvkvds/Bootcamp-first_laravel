@@ -16,7 +16,7 @@ class Movie extends Model
 
     public function user()
     {
-        return $this->belongsToMany(User::class)->withPivot('watched', 'rated', 'rating');
+        return $this->belongsToMany(User::class)->withPivot('watched', 'rated', 'rating', 'id');
     }
 
     protected $fillable = [

@@ -48,5 +48,10 @@ Route::post('/movies', [App\Http\Controllers\MovieController::class, 'index']);
 
 Route::get('/movies/{movie:slug}',  [App\Http\Controllers\MovieController::class, 'show']);
 
+Route::post('/movies/store',  [App\Http\Controllers\MovieController::class, 'store'])->middleware('auth');
+Route::put('/movies/{id}',  [App\Http\Controllers\MovieController::class, 'update'])->middleware('auth');
+
+
+
 
 

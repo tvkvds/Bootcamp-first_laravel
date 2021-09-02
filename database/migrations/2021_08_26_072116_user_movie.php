@@ -13,12 +13,13 @@ class UserMovie extends Migration
      */
     public function up()
     {
-        Schema::create('user_movies', function (Blueprint $table) {
+        Schema::create('movie_user', function (Blueprint $table) {
 
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('movie_id')->constrained();
             $table->timestamps();
+            $table->tinyInteger('watchlist')->default(0);
             $table->tinyInteger('watched')->default(0);
             $table->tinyInteger('rated')->default(0);
             $table->bigInteger('rating')->nullable();

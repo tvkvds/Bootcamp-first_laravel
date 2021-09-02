@@ -23,7 +23,7 @@ class MovieController extends Controller
     public function index()
     {
 
-        //get records from api
+        //get array of movie records from api
         $imdb = new Imdb;
         $moviesAPI = $imdb->search($_POST['findmovie']);
 
@@ -41,15 +41,9 @@ class MovieController extends Controller
             );
         }, $moviesAPI['titles']);
 
-        #$var->intersect(Model::whereIn('id', [1, 2, 3])->get());
-
-        //make array of $moviesAPI['id']'s 
-        // call firstOrCreate function
-        // add on intersect and add moviesAPI['id'] array as second argument of whereIn
-    
-
-        //combine API en DB array for view
-        // TODO 
+        // TODO N+1 problem fixing
+        
+        // TODO - ish
         // Maybe "cast" moviesDB attributes to array for ease of use / readability in view
 
         $movies = [];
@@ -68,7 +62,7 @@ class MovieController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -79,7 +73,34 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $movie_id = $_POST['movie_id'];
+        $user_id = Auth::check() ? Auth::id() : false;
+
+        if ($_POST['action'] === 'watchlist')
+        {
+            $movie = Movie::find($movie_id);
+
+            $movie->update([ "watchlists" => +1 ]);
+
+            $attributes = ['watchlist' => $_POST['watchlist'], 'created_at' => now()];
+        }
+
+        if ($_POST['action'] === 'watched')
+        {
+            $movie = Movie::find($movie_id);
+
+            $movie->update([ "watched_by" => +1 ]);
+
+            $attributes = ['watched' => $_POST['watched'], 'created_at' => now()];
+        }
+        
+       
+        
+        $movie->user()->attach($user_id, $attributes);
+
+        return redirect()->back();
+        
     }
 
     /**
@@ -90,14 +111,7 @@ class MovieController extends Controller
      */
     public function show($id)
     {
-
-        # TODO
-        #
-        # refactor route and controller function to use movie slug, not movie id
-        # route /movies/{movie:slug} should give movie slug in URI
-        # imdb movie - database movie todo needs to be implemented first
-
-        
+    
         //check for logged in user and set params
         $userId = Auth::check() ? Auth::id() : false;
         
@@ -111,12 +125,9 @@ class MovieController extends Controller
             $user->movies;
         }
 
-
-        //request movie from api and database
+        //request movie from api and (add to) database
         $imdb = new Imdb;
         $movieAPI = $imdb->film($id);
-
-        
 
         $movieDB = Movie::firstOrCreate(
             [ 'movie_id' => $movieAPI['id'] ],
@@ -128,15 +139,17 @@ class MovieController extends Controller
             ]
         );
 
-        
+        //checks if current user has a record for current movie - bool
+        $movieRecord = $user->movies->contains($movieDB['id']);
+        var_dump($hasTask);
+
+       
 
         return view('/movies/show', [
             'movieAPI' => $movieAPI,
             'user' => $user,
             'movieDB' => $movieDB
         ]);
-        
-            
         
     }
 
@@ -160,7 +173,30 @@ class MovieController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $movie_id = $_POST['movie_id'];
+        $user_id = Auth::check() ? Auth::id() : false;
+        $movie = Movie::find($movie_id);
+        
+
+        if ($_POST['action'] === 'watchlist')
+        {
+
+            $movie->update([ "watchlists" => +1 ]);
+
+            $attributes = ['watchlist' => $_POST['watchlist'], 'updated_at' => now()];
+        }
+        
+        if ($_POST['action'] === 'watched')
+        {
+        
+            $movie->update([ "watched_by" => +1 ]);
+
+            $attributes = ['watched' => $_POST['watched'], 'updated_at' => now()];
+        }
+        
+        $movie->user()->updateExistingPivot($user_id, $attributes);
+
+        return redirect()->back();
     }
 
     /**
